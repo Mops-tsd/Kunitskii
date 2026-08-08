@@ -79,7 +79,7 @@ const groundFragment = /* glsl */ `
 
     // Крупное пятно неровности: снег ложится неравномерно, ровная
     // заливка выглядит как пластик.
-    float grain = hash(floor(vWorld * 0.35)) * 0.14 + hash(floor(vWorld * 1.4)) * 0.05;
+    float grain = hash(floor(vWorld * 0.45)) * 0.16;
 
     vec3 color = mix(uSlab, uStreetColor, onStreet) * (0.88 + grain);
 

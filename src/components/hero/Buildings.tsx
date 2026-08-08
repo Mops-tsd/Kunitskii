@@ -82,6 +82,25 @@ export function Buildings({ count }: { count: number }) {
     u.uTime.value = (u.uTime.value + delta) % 600;
     u.uBuild.value = span(heroState.progress, PHASE.build[0], PHASE.build[1]);
     u.uLights.value = span(heroState.progress, PHASE.lights[0], PHASE.lights[1]);
+
+    /*
+     * Достроенный город переводим в непрозрачный проход.
+     *
+     * Это самая дорогая деталь всей сцены. Прозрачные объекты рисуются
+     * последними и без отсечения по глубине: с уровня улицы за каждым
+     * фасадом стоит ещё десяток, и шейдер считался для всех, хотя видно
+     * только ближний. В непрозрачном проходе видеокарта отбрасывает
+     * закрытые пиксели до того, как считать их цвет.
+     *
+     * Прозрачность нужна только пока идут работы — сквозь каркас видно
+     * стройку. Как только бетон везде налит, разницы в кадре нет,
+     * а работы меньше в разы.
+     */
+    const solid = u.uBuild.value > 0.985;
+    if (material.transparent === solid) {
+      material.transparent = !solid;
+      material.needsUpdate = true;
+    }
   });
 
   return (

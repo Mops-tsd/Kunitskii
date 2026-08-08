@@ -51,12 +51,16 @@ const ar: Content = {
     section: 'النطاق',
     heading: 'المجموعة بالأرقام',
     items: [
-      { value: 256, suffix: ' مليار ₽', label: 'محفظة المشاريع الاستثمارية' },
-      { value: 58.5, decimals: 1, suffix: ' مليار ₽', label: 'إيرادات المجموعة لعام 2024' },
-      { value: 2.9, decimals: 1, suffix: ' مليون م²', label: 'بنك الأراضي السكنية' },
+      { value: 15, suffix: '+', label: 'عاماً في السوق' },
+      { value: 650000, suffix: ' م²', label: 'مبنية وقيد الإنشاء' },
+      { value: 5000, suffix: '+', label: 'موظف' },
       { value: 14, suffix: '', label: 'منطقة عمل' },
+      { value: 256, suffix: ' مليار ₽', label: 'محفظة المشاريع الاستثمارية' },
+      { value: 58.5, decimals: 1, suffix: ' مليار ₽', label: 'الإيرادات لعام 2024' },
+      { value: 2.9, decimals: 1, suffix: ' مليون م²', label: 'بنك الأراضي السكنية' },
+      { value: 5.5, decimals: 1, suffix: ' مليار ₽', label: 'عقود مع «دوم.آر إف»' },
     ],
-    note: 'بيانات مجموعة «تي إس دي»؛ الإيرادات للسنة المالية 2024.',
+    note: 'الصف الأول بيانات مجموعة «تي إس دي»، والثاني مؤشرات النشاط الاستثماري للسنة المالية 2024.',
   },
 
   recognition: {
@@ -158,7 +162,7 @@ const ar: Content = {
         coords: [64.54, 40.54],
         status: 'قيد الإنشاء',
         description: 'مدينة تابعة في المنطقة القطبية مصممة لـ 28,000 نسمة.',
-        image: '/images/arkhangelsk.webp',
+        image: '/images/arktika-park.webp',
       },
       {
         name: 'بيريغ أركتيكي',
@@ -167,7 +171,7 @@ const ar: Content = {
         coords: [68.97, 33.07],
         status: 'قيد الإنشاء',
         description: 'مجمع سكني شمال الدائرة القطبية.',
-        image: '/images/murmansk.webp',
+        image: '/images/murmansk-kvartal.webp',
       },
       {
         name: 'كينون ريفييرا بارك',
@@ -176,7 +180,7 @@ const ar: Content = {
         coords: [52.03, 113.5],
         status: 'قيد الإنشاء',
         description: 'مجمع سكني على بحيرة كينون.',
-        image: '/images/chita.webp',
+        image: '/images/kenon-riviera.webp',
       },
       {
         name: 'مجمع شارع بافلوفيتش',
@@ -185,7 +189,7 @@ const ar: Content = {
         coords: [48.48, 135.07],
         status: 'قيد الإنشاء',
         description: 'مجمع سكني في وسط المدينة.',
-        image: '/images/khabarovsk.webp',
+        image: '/images/khabarovsk-pavlovicha.webp',
       },
       {
         name: 'الحي السكني الدولي',
@@ -194,7 +198,7 @@ const ar: Content = {
         coords: [49.65, 117.33],
         status: 'قيد الإنشاء',
         description: 'حي سكني على الحدود مع الصين.',
-        image: '',
+        image: '/images/zabaykalsk-kvartal.webp',
       },
       {
         name: 'مجمع شارع سولنيتشنايا',
@@ -203,7 +207,7 @@ const ar: Content = {
         coords: [67.61, 33.67],
         status: 'قيد التنفيذ',
         description: 'مجمع سكني في مدينة تقع شمال الدائرة القطبية.',
-        image: '',
+        image: '/images/kirovsk-solnechnaya.webp',
       },
       {
         name: 'مجمع شارع موروشكوفايا',
@@ -212,16 +216,7 @@ const ar: Content = {
         coords: [67.94, 32.97],
         status: 'قيد التنفيذ',
         description: 'مجمع سكني في مدينة صناعية أحادية النشاط بشبه جزيرة كولا.',
-        image: '',
-      },
-      {
-        name: 'المقر الرئيسي للمجموعة',
-        city: 'فلاديفوستوك',
-        region: 'إقليم بريمورسكي',
-        coords: [43.12, 131.89],
-        status: 'قيد التشغيل',
-        description: 'شركة التطوير المتخصصة «TSD» — المقر الرئيسي لقطاع الشرق الأقصى.',
-        image: '/images/vladivostok.webp',
+        image: '/images/monchegorsk-moroshkovaya.webp',
       },
     ],
   },

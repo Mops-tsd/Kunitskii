@@ -2,9 +2,9 @@ import type { Content } from './types';
 
 const en: Content = {
   meta: {
-    title: 'Evgeny Kunitskiy — CEO, TransStroy Development Group',
+    title: 'Evgeny Kunitskiy — Managing Director, TransStroy Development Group',
     description:
-      'Evgeny Kunitskiy is CEO of TransStroy Development Group (TSD Group), building residential districts and infrastructure across the Russian Arctic and Far East.',
+      'Evgeny Kunitskiy is Managing Director of TransStroy Development Group (TSD Group), building residential districts and infrastructure across the Russian Arctic and Far East.',
   },
 
   nav: {
@@ -24,7 +24,7 @@ const en: Content = {
   },
 
   hero: {
-    role: 'Chief Executive Officer, TransStroy Development Group',
+    role: 'Managing Director, TransStroy Development Group',
     name: 'Evgeny',
     surname: 'Kunitskiy',
     tagline: ['Arctic', 'Far East', 'Development'],
@@ -36,7 +36,7 @@ const en: Content = {
     section: 'Profile',
     heading: 'The person behind the projects',
     lead:
-      'Evgeny Kunitskiy is Chief Executive Officer of TransStroy Development Group (TSD Group), an investment and construction holding working in regions with severe climate conditions.',
+      'Evgeny Kunitskiy is Managing Director of TransStroy Development Group (TSD Group), an investment and construction holding working in regions with severe climate conditions.',
     body: [
       'Under his management the group carries out integrated development across the Arctic zone of Russia and the Far Eastern Federal District — residential districts along with engineering infrastructure, boiler plants, treatment facilities and utility networks.',
       'He heads group companies in several regions, including the specialised developer TSD in Vladivostok and TSD Razvitie in Chita, and speaks at industry events on delivering investment projects in demanding territories.',
@@ -51,12 +51,16 @@ const en: Content = {
     section: 'Scale',
     heading: 'The group in numbers',
     items: [
-      { value: 256, suffix: ' bn ₽', label: 'investment project portfolio' },
-      { value: 58.5, decimals: 1, suffix: ' bn ₽', label: 'group turnover in 2024' },
-      { value: 2.9, decimals: 1, suffix: ' m m²', label: 'residential land bank' },
+      { value: 15, suffix: '+', label: 'years in the market' },
+      { value: 650000, suffix: ' m²', label: 'built and under construction' },
+      { value: 5000, suffix: '+', label: 'employees' },
       { value: 14, suffix: '', label: 'regions of operation' },
+      { value: 256, suffix: ' bn ₽', label: 'investment project portfolio' },
+      { value: 58.5, decimals: 1, suffix: ' bn ₽', label: 'turnover in 2024' },
+      { value: 2.9, decimals: 1, suffix: ' m m²', label: 'residential land bank' },
+      { value: 5.5, decimals: 1, suffix: ' bn ₽', label: 'contracts with DOM.RF' },
     ],
-    note: 'Figures for TSD Group; turnover is for the 2024 financial year.',
+    note: 'The first row is TSD Group data. The second covers investment activity for the 2024 financial year.',
   },
 
   recognition: {
@@ -163,7 +167,7 @@ const en: Content = {
         status: 'Under construction',
         description:
           'A satellite town in the Arctic zone designed for 28,000 residents.',
-        image: '/images/arkhangelsk.webp',
+        image: '/images/arktika-park.webp',
       },
       {
         name: 'Bereg Arktiki',
@@ -172,7 +176,7 @@ const en: Content = {
         coords: [68.97, 33.07],
         status: 'Under construction',
         description: 'A residential complex above the Arctic Circle.',
-        image: '/images/murmansk.webp',
+        image: '/images/murmansk-kvartal.webp',
       },
       {
         name: 'Kenon Riviera Park',
@@ -181,7 +185,7 @@ const en: Content = {
         coords: [52.03, 113.5],
         status: 'Under construction',
         description: 'A residential complex on Lake Kenon.',
-        image: '/images/chita.webp',
+        image: '/images/kenon-riviera.webp',
       },
       {
         name: 'Pavlovicha Street Complex',
@@ -190,7 +194,7 @@ const en: Content = {
         coords: [48.48, 135.07],
         status: 'Under construction',
         description: 'A residential complex in the central part of the city.',
-        image: '/images/khabarovsk.webp',
+        image: '/images/khabarovsk-pavlovicha.webp',
       },
       {
         name: 'International Residential Quarter',
@@ -199,7 +203,7 @@ const en: Content = {
         coords: [49.65, 117.33],
         status: 'Under construction',
         description: 'A residential quarter on the border with China.',
-        image: '',
+        image: '/images/zabaykalsk-kvartal.webp',
       },
       {
         name: 'Solnechnaya Street development',
@@ -208,7 +212,7 @@ const en: Content = {
         coords: [67.61, 33.67],
         status: 'Under construction',
         description: 'A residential complex in a town above the Arctic Circle.',
-        image: '',
+        image: '/images/kirovsk-solnechnaya.webp',
       },
       {
         name: 'Moroshkovaya Street development',
@@ -218,17 +222,7 @@ const en: Content = {
         status: 'Under construction',
         description:
           'A residential complex in a single-industry town on the Kola Peninsula.',
-        image: '',
-      },
-      {
-        name: 'Group Headquarters',
-        city: 'Vladivostok',
-        region: 'Primorsky Krai',
-        coords: [43.12, 131.89],
-        status: 'Operating',
-        description:
-          'Specialised developer TSD — the head office of the Far East division.',
-        image: '/images/vladivostok.webp',
+        image: '/images/monchegorsk-moroshkovaya.webp',
       },
     ],
   },

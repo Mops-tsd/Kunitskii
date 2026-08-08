@@ -51,12 +51,16 @@ const zh: Content = {
     section: '规模',
     heading: '集团数据',
     items: [
-      { value: 256, suffix: ' 十亿卢布', label: '投资项目组合' },
-      { value: 58.5, decimals: 1, suffix: ' 十亿卢布', label: '2024 年集团营业额' },
-      { value: 2.9, decimals: 1, suffix: ' 百万 m²', label: '住宅土地储备' },
+      { value: 15, suffix: '+', label: '年市场经验' },
+      { value: 650000, suffix: ' m²', label: '已建与在建面积' },
+      { value: 5000, suffix: '+', label: '员工' },
       { value: 14, suffix: '', label: '业务地区' },
+      { value: 256, suffix: ' 十亿卢布', label: '投资项目组合' },
+      { value: 58.5, decimals: 1, suffix: ' 十亿卢布', label: '2024 年营业额' },
+      { value: 2.9, decimals: 1, suffix: ' 百万 m²', label: '住宅土地储备' },
+      { value: 5.5, decimals: 1, suffix: ' 十亿卢布', label: '与 DOM.RF 的合同' },
     ],
-    note: 'TSD 集团数据；营业额为 2024 年度。',
+    note: '第一行为 TSD 集团数据，第二行为 2024 年度投资业务指标。',
   },
 
   recognition: {
@@ -157,7 +161,7 @@ const zh: Content = {
         coords: [64.54, 40.54],
         status: '在建',
         description: '北极地区卫星城项目，规划容纳 28,000 名居民。',
-        image: '/images/arkhangelsk.webp',
+        image: '/images/arktika-park.webp',
       },
       {
         name: '北极海岸',
@@ -166,7 +170,7 @@ const zh: Content = {
         coords: [68.97, 33.07],
         status: '在建',
         description: '北极圈内的住宅综合体。',
-        image: '/images/murmansk.webp',
+        image: '/images/murmansk-kvartal.webp',
       },
       {
         name: '克农里维埃拉公园',
@@ -175,7 +179,7 @@ const zh: Content = {
         coords: [52.03, 113.5],
         status: '在建',
         description: '克农湖畔的住宅综合体。',
-        image: '/images/chita.webp',
+        image: '/images/kenon-riviera.webp',
       },
       {
         name: '巴甫洛维奇街住宅区',
@@ -184,7 +188,7 @@ const zh: Content = {
         coords: [48.48, 135.07],
         status: '在建',
         description: '位于市中心区域的住宅综合体。',
-        image: '/images/khabarovsk.webp',
+        image: '/images/khabarovsk-pavlovicha.webp',
       },
       {
         name: '国际住宅区',
@@ -193,7 +197,7 @@ const zh: Content = {
         coords: [49.65, 117.33],
         status: '在建',
         description: '中俄边境的住宅区。',
-        image: '',
+        image: '/images/zabaykalsk-kvartal.webp',
       },
       {
         name: '太阳街住宅区',
@@ -202,7 +206,7 @@ const zh: Content = {
         coords: [67.61, 33.67],
         status: '建设中',
         description: '北极圈以北城市的住宅综合体。',
-        image: '',
+        image: '/images/kirovsk-solnechnaya.webp',
       },
       {
         name: '云莓街住宅区',
@@ -211,16 +215,7 @@ const zh: Content = {
         coords: [67.94, 32.97],
         status: '建设中',
         description: '科拉半岛单一工业城市的住宅综合体。',
-        image: '',
-      },
-      {
-        name: '集团总部',
-        city: '符拉迪沃斯托克',
-        region: '滨海边疆区',
-        coords: [43.12, 131.89],
-        status: '运营中',
-        description: '专业开发商「TSD」——远东业务总部。',
-        image: '/images/vladivostok.webp',
+        image: '/images/monchegorsk-moroshkovaya.webp',
       },
     ],
   },

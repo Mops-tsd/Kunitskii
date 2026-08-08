@@ -49,9 +49,16 @@ function Card({ project, delay }: { project: Project; delay: number }) {
               alt={`${project.name}, ${project.city}`}
               loading="lazy"
               decoding="async"
-              className="h-full w-full scale-105 object-cover opacity-70 grayscale transition-all duration-[900ms] ease-out group-hover:scale-100 group-hover:opacity-100 group-hover:grayscale-0"
+              /*
+               * Ни обесцвечивания, ни притушенности: раньше на карточках
+               * стояли временные городские снимки, и общий фильтр приводил
+               * их к одному виду. С настоящими визуализациями объектов он
+               * только прячет то, ради чего раздел и существует.
+               */
+              className="h-full w-full scale-[1.03] object-cover transition-transform duration-[900ms] ease-out group-hover:scale-100"
             />
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void via-transparent to-transparent" />
+            {/* Лёгкое затемнение только снизу — под подпись, не на весь кадр. */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/45 via-transparent to-transparent" />
           </>
         ) : (
           /* Фотографии ещё нет — вместо неё чертёжная заглушка. */

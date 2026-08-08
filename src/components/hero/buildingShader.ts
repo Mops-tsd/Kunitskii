@@ -95,6 +95,18 @@ export const buildingFragment = /* glsl */ `
   uniform float uStorey;
   uniform float uFogNear;
   uniform float uFogFar;
+  /*
+   * Прогресс стройки и вечера — теми же значениями, что и в вершинном
+   * шейдере. Нужны здесь как переключатели: по ним пропускаются целые
+   * куски расчёта, когда они заведомо ни на что не влияют.
+   *
+   * Ветвление по uniform для видеокарты бесплатно: значение одно на весь
+   * кадр, поэтому все пиксели идут одной веткой и вторая действительно
+   * не считается. Так делать можно далеко не всегда — на ветвлении по
+   * данным пикселя вышло бы наоборот.
+   */
+  uniform float uBuild;
+  uniform float uLights;
 
   varying vec2 vUv;
   varying vec2 vGrid;
@@ -148,8 +160,13 @@ export const buildingFragment = /* glsl */ `
      * как проволочная модель.
      */
     float slab = ruledLine(floorCoord, 1.6) * (1.0 - roofness);
-    float column = ruledLine(bayCoord * 0.5, 1.4) * (1.0 - roofness);
-    float skeleton = max(slab, column * 0.55);
+    float skeleton = slab;
+    // Стойки нужны только пока идут работы: на готовом доме их не видно,
+    // а лишний fwidth на каждый пиксель фасада — заметная часть кадра.
+    if (uBuild < 0.999) {
+      float column = ruledLine(bayCoord * 0.5, 1.4) * (1.0 - roofness);
+      skeleton = max(slab, column * 0.55);
+    }
 
     // --- окно внутри этажа: снизу глухой пояс перекрытия, сверху перемычка
     float pane =
@@ -160,19 +177,22 @@ export const buildingFragment = /* glsl */ `
     // растущего дома висел бы ряд половинок.
     pane *= step((floorId + 1.0) * uStorey, vTop + 0.01);
 
-    /*
-     * Свет горит квартирами, а не отдельными окнами: одно зерно на пару
-     * соседних осей. Случайное посветление каждого окна по отдельности
-     * давало рябь, из-за которой фасад читался как шум.
-     */
-    float roll = hash(vec2(floor(bayId * 0.5), floorId) + vSeed * 11.0);
-    // Нижние этажи обжиты плотнее — там входные группы и встроенные помещения.
-    float lowBoost = 1.0 + 0.25 * (1.0 - smoothstep(0.0, 7.0, floorId));
-    float lit = step(0.68, roll * lowBoost);
-    // Часть окон медленно «дышит» — город выглядит живым, а не отрендеренным.
-    lit *= 0.7 + 0.3 * sin(uTime * 0.6 + roll * 43.0);
-    // Внутри квартиры окна светят чуть по-разному.
-    lit *= 0.75 + 0.35 * hash(vec2(bayId, floorId) + vSeed);
+    float lit = 0.0;
+    if (uLights > 0.001) {
+      /*
+       * Свет горит квартирами, а не отдельными окнами: одно зерно на пару
+       * соседних осей. Случайное посветление каждого окна по отдельности
+       * давало рябь, из-за которой фасад читался как шум.
+       */
+      float roll = hash(vec2(floor(bayId * 0.5), floorId) + vSeed * 11.0);
+      // Нижние этажи обжиты плотнее — там входные группы и встроенные помещения.
+      float lowBoost = 1.0 + 0.25 * (1.0 - smoothstep(0.0, 7.0, floorId));
+      lit = step(0.68, roll * lowBoost);
+      // Часть окон медленно «дышит» — город выглядит живым, а не отрендеренным.
+      lit *= 0.7 + 0.3 * sin(uTime * 0.6 + roll * 43.0);
+      // Внутри квартиры окна светят чуть по-разному.
+      lit *= 0.75 + 0.35 * hash(vec2(bayId, floorId) + vSeed);
+    }
 
     // --- освещение
     vec3 lightDir = normalize(vec3(-0.45, 0.72, 0.52));

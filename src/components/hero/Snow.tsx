@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { PHASE, heroState, span } from './heroState';
@@ -67,8 +67,8 @@ const snowFragment = /* glsl */ `
   }
 `;
 
-const FIELD = 560;
-const HEIGHT = 300;
+const FIELD = 170;
+const HEIGHT = 110;
 
 export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number }) {
   const geometry = useMemo(() => {
@@ -114,7 +114,30 @@ export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number 
     [pixelRatio]
   );
 
-  useFrame((_, delta) => {
+  const ref = useRef<THREE.Points>(null);
+
+  useFrame(({ camera }, delta) => {
+    /*
+     * Поле снега едет за камерой.
+     *
+     * Раньше оно стояло в нуле, и чтобы снег был виден на отлёте, объём
+     * пришлось растянуть на триста метров. Те же частицы, размазанные по
+     * объёму в сотни раз большему, превращались в редкие точки — снег
+     * читался как звёздное небо. Теперь плотность одинакова и у земли,
+     * и на высоте: снег всегда вокруг зрителя.
+     *
+     * Параллакса при этом нет, но у снега его и не читают: частицы
+     * случайны, и опереться взгляду всё равно не на что.
+     */
+    const node = ref.current;
+    if (node) {
+      node.position.set(
+        camera.position.x,
+        camera.position.y - HEIGHT * 0.5,
+        camera.position.z
+      );
+    }
+
     material.uniforms.uTime.value += delta;
     // Снег начинает идти на фазе заполнения и набирает силу к финалу.
     const early = span(heroState.progress, PHASE.lights[0], PHASE.lights[1]) * 0.45;
@@ -122,5 +145,5 @@ export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number 
     material.uniforms.uIntensity.value = early + late;
   });
 
-  return <points geometry={geometry} material={material} renderOrder={3} />;
+  return <points ref={ref} geometry={geometry} material={material} renderOrder={3} />;
 }

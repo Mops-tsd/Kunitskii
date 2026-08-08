@@ -96,11 +96,13 @@ export function BlueprintGrid() {
     material.uniforms.uReveal.value = reveal * 250;
     // Чертёж живёт до бетона: как только объёмы налиты, разбивочные
     // оси на площадке уже не нужны — их роль отыграна.
-    material.uniforms.uRetire.value = span(
-      heroState.progress,
-      PHASE.lights[0],
-      PHASE.lights[1]
-    );
+    const retire = span(heroState.progress, PHASE.lights[0], PHASE.lights[1]);
+    material.uniforms.uRetire.value = retire;
+
+    // Полностью убранную сетку выключаем: прозрачный слой во весь экран
+    // всё равно проходит через шейдер и стоит столько же, сколько видимый.
+    const mesh = ref.current;
+    if (mesh) mesh.visible = retire < 0.995;
   });
 
   return (

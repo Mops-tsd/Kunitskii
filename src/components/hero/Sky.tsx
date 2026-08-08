@@ -49,6 +49,10 @@ export function Sky() {
         fragmentShader: skyFragment,
         side: THREE.BackSide,
         depthWrite: false,
+        // Глубину проверяем: задник должен закрашивать только то, что
+        // не закрыто сценой. Без этого он каждый кадр заливал весь экран
+        // целиком, а поверх него рисовалось всё остальное.
+        depthTest: true,
         // Задник не должен растворяться в собственном тумане сцены.
         fog: false,
         uniforms: {
@@ -72,7 +76,7 @@ export function Sky() {
   });
 
   return (
-    <mesh ref={ref} material={material} renderOrder={-1} frustumCulled={false}>
+    <mesh ref={ref} material={material} renderOrder={900} frustumCulled={false}>
       <sphereGeometry args={[600, 24, 16]} />
     </mesh>
   );
