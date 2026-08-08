@@ -89,6 +89,12 @@ const en: Content = {
           'Participation in the federal rental housing programme for the Far Eastern Federal District.',
       },
       {
+        source: 'Integrated area development',
+        title: 'Districts delivered with their infrastructure',
+        body:
+          'Projects are delivered together with social, transport and utility infrastructure, not as residential blocks alone.',
+      },
+      {
         source: 'Preferential regimes',
         title: 'Priority development areas and the Arctic zone',
         body:
