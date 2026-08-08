@@ -202,6 +202,25 @@ const en: Content = {
         image: '',
       },
       {
+        name: 'Solnechnaya Street development',
+        city: 'Kirovsk',
+        region: 'Murmansk Oblast',
+        coords: [67.61, 33.67],
+        status: 'Under construction',
+        description: 'A residential complex in a town above the Arctic Circle.',
+        image: '',
+      },
+      {
+        name: 'Moroshkovaya Street development',
+        city: 'Monchegorsk',
+        region: 'Murmansk Oblast',
+        coords: [67.94, 32.97],
+        status: 'Under construction',
+        description:
+          'A residential complex in a single-industry town on the Kola Peninsula.',
+        image: '',
+      },
+      {
         name: 'Group Headquarters',
         city: 'Vladivostok',
         region: 'Primorsky Krai',
