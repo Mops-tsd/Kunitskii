@@ -61,12 +61,20 @@ export function Preloader({ onDone }: { onDone: () => void }) {
     >
       <div className="eyebrow">TSD GROUP</div>
 
+      {/*
+        Здесь стоит цитата Куницкого — та же, что открывает раздел
+        «Персона». Первое, что видит человек, и главное, что о нём
+        нужно понять, — это должна быть одна и та же фраза.
+      */}
       <div className="preloader-word">
-        <span className="mask-line h-display text-[13vw] leading-[0.9] text-chalk md:text-[8vw]">
+        <span className="mask-line h-display text-[10vw] leading-[0.92] text-chalk md:text-[6vw]">
           <span className="block">{t.preloader.line1}</span>
         </span>
-        <span className="mask-line h-display text-[13vw] leading-[0.9] text-signalMuted md:text-[8vw]">
+        <span className="mask-line h-display text-[10vw] leading-[0.92] text-chalk md:text-[6vw]">
           <span className="block">{t.preloader.line2}</span>
+        </span>
+        <span className="mask-line h-display text-[10vw] leading-[0.92] text-signalMuted md:text-[6vw]">
+          <span className="block">{t.preloader.line3}</span>
         </span>
       </div>
 

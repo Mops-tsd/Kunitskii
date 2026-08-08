@@ -3,7 +3,7 @@
 import { useLayoutEffect, useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { buildCity } from './cityLayout';
+import { buildCity, STOREY } from './cityLayout';
 import { buildingFragment, buildingVertex } from './buildingShader';
 import { PHASE, heroState, span } from './heroState';
 import { PALETTE } from '@/lib/palette';
@@ -27,7 +27,7 @@ export function Buildings({ count }: { count: number }) {
       dims[i * 3 + 1] = b.depth;
       dims[i * 3 + 2] = b.height;
       delay[i] = b.delay;
-      seed[i] = i * 0.618;
+      seed[i] = b.seed;
     });
 
     geo.setAttribute('aDims', new THREE.InstancedBufferAttribute(dims, 3));
@@ -44,15 +44,17 @@ export function Buildings({ count }: { count: number }) {
         transparent: true,
         depthWrite: true,
         uniforms: {
-          uFrame: { value: 0 },
-          uFill: { value: 0 },
+          uBuild: { value: 0 },
+          uLights: { value: 0 },
           uTime: { value: 0 },
+          uStorey: { value: STOREY },
           uOutline: { value: new THREE.Color(PALETTE.outline) },
-          uBody: { value: new THREE.Color(PALETTE.body) },
+          uConcrete: { value: new THREE.Color(PALETTE.concrete) },
+          uRoof: { value: new THREE.Color(PALETTE.roof) },
           uWindow: { value: new THREE.Color(PALETTE.window) },
           uFogColor: { value: new THREE.Color(PALETTE.void) },
-          uFogNear: { value: 55 },
-          uFogFar: { value: 165 },
+          uFogNear: { value: 90 },
+          uFogFar: { value: 340 },
         },
       }),
     []
@@ -77,9 +79,9 @@ export function Buildings({ count }: { count: number }) {
 
   useFrame((_, delta) => {
     const u = material.uniforms;
-    u.uTime.value += delta;
-    u.uFrame.value = span(heroState.progress, PHASE.frames[0], PHASE.frames[1]);
-    u.uFill.value = span(heroState.progress, PHASE.fill[0], PHASE.fill[1]);
+    u.uTime.value = (u.uTime.value + delta) % 600;
+    u.uBuild.value = span(heroState.progress, PHASE.build[0], PHASE.build[1]);
+    u.uLights.value = span(heroState.progress, PHASE.lights[0], PHASE.lights[1]);
   });
 
   return (

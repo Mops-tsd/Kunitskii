@@ -28,6 +28,7 @@ const gridFragment = /* glsl */ `
 
   uniform float uReveal;    // радиус проявления сетки
   uniform float uTime;
+  uniform float uRetire;    // 0 — чертёж на месте, 1 — сетка убрана
   uniform vec3 uMinor;
   uniform vec3 uMajor;
 
@@ -46,14 +47,22 @@ const gridFragment = /* glsl */ `
     float dist = length(vWorld);
 
     // Сетка расходится от центра кольцом, а не включается разом.
-    float reveal = 1.0 - smoothstep(uReveal - 12.0, uReveal, dist);
+    float reveal = 1.0 - smoothstep(uReveal - 18.0, uReveal, dist);
     // Бегущий световой обод по фронту проявления.
-    float ring = exp(-pow((dist - uReveal) / 5.0, 2.0)) * 0.9;
+    float ring = exp(-pow((dist - uReveal) / 9.0, 2.0)) * 0.9;
 
-    float fade = 1.0 - smoothstep(20.0, 105.0, dist);
+    float fade = 1.0 - smoothstep(40.0, 230.0, dist);
 
-    vec3 color = uMinor * minor * 0.5 + uMajor * major;
-    float alpha = (minor * 0.28 + major * 0.6) * reveal * fade + ring * fade * 0.5;
+    /*
+     * Мелкая сетка уходит первой. С высоты отлёта шаг в два метра
+     * складывается в муар, и район выглядел листом миллиметровки:
+     * к финалу от чертежа остаются только крупные оси, и то вполсилы.
+     */
+    vec3 color = uMinor * minor * 0.5 * (1.0 - uRetire) + uMajor * major;
+    float alpha =
+      (minor * 0.28 * (1.0 - uRetire) + major * 0.6 * (1.0 - uRetire * 0.75)) *
+        reveal * fade +
+      ring * fade * 0.5;
 
     if (alpha < 0.004) discard;
     gl_FragColor = vec4(color + uMajor * ring, alpha);
@@ -71,6 +80,7 @@ export function BlueprintGrid() {
         uniforms: {
           uReveal: { value: 0 },
           uTime: { value: 0 },
+          uRetire: { value: 0 },
           uMinor: { value: new THREE.Color(PALETTE.gridMinor) },
           uMajor: { value: new THREE.Color(PALETTE.gridMajor) },
         },
@@ -83,19 +93,28 @@ export function BlueprintGrid() {
   useFrame((_, delta) => {
     material.uniforms.uTime.value += delta;
     const reveal = span(heroState.progress, PHASE.gridIn[0], PHASE.gridIn[1]);
-    material.uniforms.uReveal.value = reveal * 130;
+    material.uniforms.uReveal.value = reveal * 250;
+    // Чертёж живёт до бетона: как только объёмы налиты, разбивочные
+    // оси на площадке уже не нужны — их роль отыграна.
+    material.uniforms.uRetire.value = span(
+      heroState.progress,
+      PHASE.lights[0],
+      PHASE.lights[1]
+    );
   });
 
   return (
     <mesh
       ref={ref}
       rotation={[-Math.PI / 2, 0, 0]}
-      position={[0, -0.02, 0]}
+      // Чуть выше плиты основания: после заливки сетка остаётся
+      // разбивочными осями на бетоне, а не пропадает под ним.
+      position={[0, 0.03, 0]}
       material={material}
       renderOrder={0}
       frustumCulled={false}
     >
-      <planeGeometry args={[300, 300]} />
+      <planeGeometry args={[560, 560]} />
     </mesh>
   );
 }

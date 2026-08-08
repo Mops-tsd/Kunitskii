@@ -6,6 +6,7 @@ import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/hero/Hero';
 import { About } from '@/components/sections/About';
 import { Stats } from '@/components/sections/Stats';
+import { Recognition } from '@/components/sections/Recognition';
 import { Principles } from '@/components/sections/Principles';
 import { Geography } from '@/components/sections/Geography';
 import { Projects } from '@/components/sections/Projects';
@@ -53,6 +54,7 @@ export default function Page() {
         <div className="relative z-10 bg-void">
           <About />
           <Stats />
+          <Recognition />
           <Principles />
           <Geography />
           <Projects />

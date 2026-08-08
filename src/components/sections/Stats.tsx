@@ -50,8 +50,13 @@ function Counter({
     if (!el) return;
 
     const counter = { value: 0 };
-    // Разделитель разрядов зависит от локали: 650 000 против 650,000.
-    const format = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : lang);
+    // Разделитель разрядов и запятая зависят от локали:
+    // 2,9 млн против 2.9 million.
+    const decimals = stat.decimals ?? 0;
+    const format = new Intl.NumberFormat(lang === 'ru' ? 'ru-RU' : lang, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
 
     const anim = gsap.to(counter, {
       value: stat.value,
@@ -59,7 +64,7 @@ function Counter({
       delay,
       ease: 'power2.out',
       onUpdate: () => {
-        el.textContent = format.format(Math.round(counter.value));
+        el.textContent = format.format(counter.value);
       },
       scrollTrigger: { trigger: el, start: 'top 88%', once: true },
     });
@@ -68,7 +73,7 @@ function Counter({
       anim.scrollTrigger?.kill();
       anim.kill();
     };
-  }, [stat.value, delay, lang]);
+  }, [stat.value, stat.decimals, delay, lang]);
 
   return (
     <Reveal delay={delay}>

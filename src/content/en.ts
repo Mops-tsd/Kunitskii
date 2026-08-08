@@ -2,14 +2,15 @@ import type { Content } from './types';
 
 const en: Content = {
   meta: {
-    title: 'Evgeny Kunitskiy — Managing Director, TransStroy Development Group',
+    title: 'Evgeny Kunitskiy — CEO, TransStroy Development Group',
     description:
-      'Evgeny Kunitskiy manages TransStroy Development Group (TSD Group), a federal developer building residential districts and infrastructure across the Russian Arctic and Far East.',
+      'Evgeny Kunitskiy is CEO of TransStroy Development Group (TSD Group), building residential districts and infrastructure across the Russian Arctic and Far East.',
   },
 
   nav: {
     about: 'Profile',
     scale: 'Scale',
+    recognition: 'Recognition',
     geography: 'Geography',
     projects: 'Projects',
     press: 'Speaking',
@@ -18,11 +19,12 @@ const en: Content = {
 
   preloader: {
     line1: 'We build',
-    line2: 'where it is hard',
+    line2: 'where no one',
+    line3: 'else builds',
   },
 
   hero: {
-    role: 'Managing Director, TransStroy Development Group',
+    role: 'Chief Executive Officer, TransStroy Development Group',
     name: 'Evgeny',
     surname: 'Kunitskiy',
     tagline: ['Arctic', 'Far East', 'Development'],
@@ -34,13 +36,13 @@ const en: Content = {
     section: 'Profile',
     heading: 'The person behind the projects',
     lead:
-      'Evgeny Kunitskiy manages TransStroy Development Group (TSD Group), a federal developer working in regions with severe climate conditions.',
+      'Evgeny Kunitskiy is Chief Executive Officer of TransStroy Development Group (TSD Group), an investment and construction holding working in regions with severe climate conditions.',
     body: [
       'Under his management the group carries out integrated development across the Arctic zone of Russia and the Far Eastern Federal District — residential districts along with engineering infrastructure, boiler plants, treatment facilities and utility networks.',
       'He heads group companies in several regions, including the specialised developer TSD in Vladivostok and TSD Razvitie in Chita, and speaks at industry events on delivering investment projects in demanding territories.',
       'His professional track record is tied to construction in regions where a short building season, permafrost and supply lines of thousands of kilometres make conventional solutions inapplicable.',
     ],
-    quotePlaceholder: 'A quote from Evgeny Kunitskiy will be placed here.',
+    quote: 'We build where no one else builds.',
     portraitLabel: 'Portrait',
     portraitNote: 'A photograph will go here',
   },
@@ -49,12 +51,47 @@ const en: Content = {
     section: 'Scale',
     heading: 'The group in numbers',
     items: [
-      { value: 15, suffix: '+', label: 'years in the market' },
-      { value: 650000, suffix: ' m²', label: 'of development' },
-      { value: 5000, suffix: '+', label: 'employees' },
+      { value: 256, suffix: ' bn ₽', label: 'investment project portfolio' },
+      { value: 58.5, decimals: 1, suffix: ' bn ₽', label: 'group turnover in 2024' },
+      { value: 2.9, decimals: 1, suffix: ' m m²', label: 'residential land bank' },
       { value: 14, suffix: '', label: 'regions of operation' },
     ],
-    note: 'Figures published by TransStroy Development Group.',
+    note: 'Figures for TSD Group; turnover is for the 2024 financial year.',
+  },
+
+  recognition: {
+    section: 'Recognition',
+    heading: 'Industry and development institutions',
+    lead:
+      'The group delivers its projects alongside state programmes and development institutions — an outside check that the talk of scale is backed by commitments.',
+    items: [
+      {
+        source: 'Ministry of Construction',
+        // TODO: confirm the status — a nomination or an award already granted.
+        title: 'Nominated for a departmental award',
+        body:
+          'For a personal contribution to the construction industry and to national housing policy.',
+      },
+      {
+        source: 'DOM.RF',
+        title: 'Equity participation contracts worth ₽5.5 bn',
+        body:
+          'Work with the state housing development institution — direct participation in federal housing mechanisms.',
+      },
+      {
+        source: 'Government of Russia',
+        title: 'Affordable rental housing in the Far East',
+        body:
+          'Participation in the federal rental housing programme for the Far Eastern Federal District.',
+      },
+      {
+        source: 'Preferential regimes',
+        title: 'Priority development areas and the Arctic zone',
+        body:
+          'Projects are delivered under the priority development area and Russian Arctic zone regimes.',
+      },
+    ],
+    note: 'Based on documents provided by the group.',
   },
 
   principles: {

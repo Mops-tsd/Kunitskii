@@ -67,8 +67,8 @@ const snowFragment = /* glsl */ `
   }
 `;
 
-const FIELD = 150;
-const HEIGHT = 90;
+const FIELD = 560;
+const HEIGHT = 300;
 
 export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number }) {
   const geometry = useMemo(() => {
@@ -117,7 +117,7 @@ export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number 
   useFrame((_, delta) => {
     material.uniforms.uTime.value += delta;
     // Снег начинает идти на фазе заполнения и набирает силу к финалу.
-    const early = span(heroState.progress, PHASE.fill[0], PHASE.fill[1]) * 0.45;
+    const early = span(heroState.progress, PHASE.lights[0], PHASE.lights[1]) * 0.45;
     const late = span(heroState.progress, PHASE.pullback[0], PHASE.pullback[1]) * 0.55;
     material.uniforms.uIntensity.value = early + late;
   });

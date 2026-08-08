@@ -11,7 +11,7 @@ export function Company() {
     <section className="relative border-t border-steel py-24 md:py-36">
       <div className="shell">
         <SectionHead
-          index="06"
+          index="07"
           label={t.company.section}
           title={t.company.heading}
           lead={t.company.lead}

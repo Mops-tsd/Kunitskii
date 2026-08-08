@@ -76,6 +76,16 @@ for (const vp of VIEWPORTS) {
     if (!u.startsWith('data:') && !u.startsWith(origin)) external.push(u.slice(0, 90));
   });
 
+  /*
+   * Ошибку компиляции шейдера на снимке не видно: объект просто пропадает
+   * из кадра, а всё остальное продолжает работать. Один раз это стоило
+   * долгих поисков — теперь ловится проверкой.
+   */
+  const shaderErrors = [];
+  p.on('console', (m) => {
+    if (m.text().includes('Shader Error')) shaderErrors.push(m.text().slice(0, 200));
+  });
+
   await p.goto(origin, { waitUntil: 'domcontentloaded' });
   // Прелоадер идёт около трёх секунд; ждём с запасом на компиляцию шейдеров.
   await p.waitForTimeout(9000);
@@ -105,10 +115,11 @@ for (const vp of VIEWPORTS) {
   check(state.locked === 'false', 'прелоадер отработал и разблокировал прокрутку');
   check(state.images === 0, 'все фото вшиты как data-URI');
   check(external.length === 0, `внешних запросов нет (${external.slice(0, 3).join(', ')})`);
+  check(shaderErrors.length === 0, `шейдеры собрались (${shaderErrors[0] ?? ''})`);
 
   if (SHOTS) {
     await p.screenshot({ path: path.join(SHOTS, `${vp.name}-hero.png`) });
-    for (const id of ['about', 'scale', 'geography', 'projects', 'contact']) {
+    for (const id of ['about', 'scale', 'recognition', 'geography', 'projects', 'contact']) {
       await p.evaluate((sel) => document.getElementById(sel)?.scrollIntoView(), id);
       await p.waitForTimeout(1600);
       await p.screenshot({ path: path.join(SHOTS, `${vp.name}-${id}.png`) });

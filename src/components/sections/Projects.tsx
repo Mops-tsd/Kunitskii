@@ -1,6 +1,7 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHead } from '@/components/ui/SectionHead';
 import type { Project } from '@/content/types';
@@ -15,7 +16,7 @@ export function Projects() {
     >
       <div className="shell">
         <SectionHead
-          index="05"
+          index="06"
           label={t.projects.section}
           title={t.projects.heading}
           lead={t.projects.lead}
@@ -44,7 +45,7 @@ function Card({ project, delay }: { project: Project; delay: number }) {
             */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={project.image}
+              src={asset(project.image)}
               alt={`${project.name}, ${project.city}`}
               loading="lazy"
               decoding="async"

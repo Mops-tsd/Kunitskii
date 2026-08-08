@@ -10,6 +10,7 @@ const zh: Content = {
   nav: {
     about: '人物',
     scale: '规模',
+    recognition: '认可',
     geography: '地域',
     projects: '项目',
     press: '演讲',
@@ -17,8 +18,9 @@ const zh: Content = {
   },
 
   preloader: {
-    line1: '我们在最艰难的地方',
-    line2: '建设',
+    line1: '我们建设在',
+    line2: '无人建设',
+    line3: '的地方',
   },
 
   hero: {
@@ -40,7 +42,7 @@ const zh: Content = {
       '他领导集团在多个地区的公司，包括符拉迪沃斯托克的专业开发商「TSD」和赤塔的「TSD 发展」，并在行业论坛上就艰难地区投资项目的实施发表演讲。',
       '他的职业道路与在施工季节短暂、永久冻土广布、物流距离长达数千公里的地区从事建设密切相关，这些条件使常规方案无法适用。',
     ],
-    quotePlaceholder: '此处将放置叶夫根尼·库尼茨基的引言。',
+    quote: '我们建设在无人建设的地方。',
     portraitLabel: '肖像',
     portraitNote: '此处将放置照片',
   },
@@ -49,12 +51,43 @@ const zh: Content = {
     section: '规模',
     heading: '集团数据',
     items: [
-      { value: 15, suffix: '+', label: '年市场经验' },
-      { value: 650000, suffix: ' m²', label: '开发面积' },
-      { value: 5000, suffix: '+', label: '员工' },
+      { value: 256, suffix: ' 十亿卢布', label: '投资项目组合' },
+      { value: 58.5, decimals: 1, suffix: ' 十亿卢布', label: '2024 年集团营业额' },
+      { value: 2.9, decimals: 1, suffix: ' 百万 m²', label: '住宅土地储备' },
       { value: 14, suffix: '', label: '业务地区' },
     ],
-    note: '数据来自运输建设开发集团。',
+    note: 'TSD 集团数据；营业额为 2024 年度。',
+  },
+
+  recognition: {
+    section: '认可',
+    heading: '行业与开发机构',
+    lead:
+      '集团的项目与国家计划及开发机构共同推进——这是对其规模承诺的外部检验。',
+    items: [
+      {
+        source: '俄罗斯建设部',
+        // TODO: 需确认状态——提名还是已授予的奖项。
+        title: '获部门奖项提名',
+        body: '表彰其对建筑行业与国家住房政策的个人贡献。',
+      },
+      {
+        source: 'DOM.RF',
+        title: '55 亿卢布股权参与合同',
+        body: '与国家住房开发机构合作，直接参与联邦住房机制。',
+      },
+      {
+        source: '俄罗斯政府',
+        title: '远东可负担租赁住房',
+        body: '参与远东联邦区的联邦租赁住房计划。',
+      },
+      {
+        source: '优惠制度',
+        title: '超前发展区与北极区',
+        body: '项目在超前发展区和俄罗斯北极区制度下实施。',
+      },
+    ],
+    note: '依据集团提供的文件。',
   },
 
   principles: {

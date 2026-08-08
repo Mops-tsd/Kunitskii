@@ -66,7 +66,7 @@ for (const vp of VIEWPORTS) {
   }
 
   // Секции контента.
-  const sections = ['about', 'scale', 'geography', 'projects', 'press', 'contact'];
+  const sections = ['about', 'scale', 'recognition', 'geography', 'projects', 'press', 'contact'];
   for (const id of sections) {
     await page.evaluate((sel) => {
       document.getElementById(sel)?.scrollIntoView();

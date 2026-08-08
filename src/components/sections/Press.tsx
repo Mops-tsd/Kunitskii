@@ -11,7 +11,7 @@ export function Press() {
     <section id="press" className="relative border-t border-steel py-24 md:py-36">
       <div className="shell">
         <SectionHead
-          index="07"
+          index="08"
           label={t.press.section}
           title={t.press.heading}
           lead={t.press.lead}

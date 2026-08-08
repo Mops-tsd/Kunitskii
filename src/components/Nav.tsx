@@ -7,6 +7,7 @@ import { LANGS, type Lang } from '@/content/types';
 const SECTIONS = [
   { id: 'about', key: 'about' },
   { id: 'scale', key: 'scale' },
+  { id: 'recognition', key: 'recognition' },
   { id: 'geography', key: 'geography' },
   { id: 'projects', key: 'projects' },
   { id: 'press', key: 'press' },

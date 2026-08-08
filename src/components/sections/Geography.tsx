@@ -85,7 +85,7 @@ export function Geography() {
     >
       <div className="shell">
         <SectionHead
-          index="04"
+          index="05"
           label={t.geography.section}
           title={t.geography.heading}
           lead={t.geography.lead}

@@ -17,9 +17,23 @@ export const LANGS: { code: Lang; label: string; dir: 'ltr' | 'rtl' }[] = [
 export interface Stat {
   /** Числовое значение для анимации счётчика. */
   value: number;
+  /**
+   * Сколько знаков после запятой показывать.
+   *
+   * По умолчанию ноль: большинство показателей целые. Но 58,5 млрд,
+   * округлённые до 59, — это уже другая цифра, а не оформление.
+   */
+  decimals?: number;
   /** Что дописать после числа: «+», «м²» и т.п. */
   suffix?: string;
   label: string;
+}
+
+export interface RecognitionItem {
+  /** Ведомство, институт развития или программа. */
+  source: string;
+  title: string;
+  body: string;
 }
 
 export interface Principle {
@@ -60,6 +74,7 @@ export interface Content {
   nav: {
     about: string;
     scale: string;
+    recognition: string;
     geography: string;
     projects: string;
     press: string;
@@ -68,6 +83,7 @@ export interface Content {
   preloader: {
     line1: string;
     line2: string;
+    line3: string;
   };
   hero: {
     role: string;
@@ -82,7 +98,8 @@ export interface Content {
     heading: string;
     lead: string;
     body: string[];
-    quotePlaceholder: string;
+    /** Цитата Куницкого — она же смысловая ось всего сайта. */
+    quote: string;
     /** Подписи в рамке, которая стоит вместо будущей фотографии. */
     portraitLabel: string;
     portraitNote: string;
@@ -91,6 +108,13 @@ export interface Content {
     section: string;
     heading: string;
     items: Stat[];
+    note: string;
+  };
+  recognition: {
+    section: string;
+    heading: string;
+    lead: string;
+    items: RecognitionItem[];
     note: string;
   };
   principles: {

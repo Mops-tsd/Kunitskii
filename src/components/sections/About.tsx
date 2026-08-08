@@ -72,7 +72,7 @@ export function About() {
             <Reveal delay={0.18}>
               <blockquote className="mt-8 border-s-2 border-signal ps-5">
                 <p className="text-lg leading-snug text-chalk">
-                  «{t.about.quotePlaceholder}»
+                  «{t.about.quote}»
                 </p>
               </blockquote>
             </Reveal>
