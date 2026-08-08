@@ -12,10 +12,12 @@ const config: Config = {
         steel: '#1F262C',
         concrete: '#8A949C',
         chalk: '#E8EDF1',
-        // Акцент — «сигнальный янтарь»: цвет строительной техники и разметки.
-        signal: '#FF6B1A',
-        signalDim: '#B84A10',
-        // Холодный контр-акцент — арктический лёд.
+        // Акцент один на весь сайт — арктический лёд.
+        // Значения продублированы в src/lib/palette.ts для 3D-сцены.
+        signal: '#5FD4E8',
+        signalDim: '#2F8FA6',
+        /** Приглушённый акцент для крупного текста — см. src/lib/palette.ts. */
+        signalMuted: '#7FB6C6',
         ice: '#5FD4E8',
       },
       fontFamily: {

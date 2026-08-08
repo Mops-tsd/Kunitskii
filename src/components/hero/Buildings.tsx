@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { buildCity } from './cityLayout';
 import { buildingFragment, buildingVertex } from './buildingShader';
 import { PHASE, heroState, span } from './heroState';
+import { PALETTE } from '@/lib/palette';
 
 export function Buildings({ count }: { count: number }) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
@@ -46,10 +47,10 @@ export function Buildings({ count }: { count: number }) {
           uFrame: { value: 0 },
           uFill: { value: 0 },
           uTime: { value: 0 },
-          uOutline: { value: new THREE.Color('#5fd4e8') },
-          uBody: { value: new THREE.Color('#1a2229') },
-          uWindow: { value: new THREE.Color('#ffb066') },
-          uFogColor: { value: new THREE.Color('#050607') },
+          uOutline: { value: new THREE.Color(PALETTE.outline) },
+          uBody: { value: new THREE.Color(PALETTE.body) },
+          uWindow: { value: new THREE.Color(PALETTE.window) },
+          uFogColor: { value: new THREE.Color(PALETTE.void) },
           uFogNear: { value: 55 },
           uFogFar: { value: 165 },
         },

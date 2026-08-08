@@ -166,7 +166,7 @@ export function Hero({ started }: { started: boolean }) {
                 <span className="block">{t.hero.name}</span>
               </span>
               <span className="mask-line text-[15vw] leading-[0.86] md:text-[9.5vw]">
-                <span className="block text-signal">{t.hero.surname}</span>
+                <span className="block text-signalMuted">{t.hero.surname}</span>
               </span>
             </h1>
 

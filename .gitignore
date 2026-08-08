@@ -5,3 +5,6 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 .DS_Store
+
+# Одиночный HTML для превью — собирается из out/ скриптом build-single-file.mjs
+preview/

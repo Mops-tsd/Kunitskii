@@ -65,7 +65,7 @@ export function Preloader({ onDone }: { onDone: () => void }) {
         <span className="mask-line h-display text-[13vw] leading-[0.9] text-chalk md:text-[8vw]">
           <span className="block">{t.preloader.line1}</span>
         </span>
-        <span className="mask-line h-display text-[13vw] leading-[0.9] text-signal md:text-[8vw]">
+        <span className="mask-line h-display text-[13vw] leading-[0.9] text-signalMuted md:text-[8vw]">
           <span className="block">{t.preloader.line2}</span>
         </span>
       </div>

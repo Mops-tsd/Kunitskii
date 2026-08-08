@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useI18n } from '@/lib/i18n';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHead } from '@/components/ui/SectionHead';
+import { PALETTE } from '@/lib/palette';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,38 +152,34 @@ export function Geography() {
                 className="geo-route"
                 d={routePath}
                 fill="none"
-                stroke="#FF6B1A"
+                stroke={PALETTE.signal}
                 strokeWidth="1.5"
                 strokeLinejoin="round"
               />
 
-              {/* Объекты */}
-              {points.map((p) => (
-                <g key={p.name} className="geo-dot">
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r="14"
-                    fill={p.arctic ? '#5FD4E8' : '#FF6B1A'}
-                    opacity="0.12"
-                  />
-                  <circle
-                    cx={p.x}
-                    cy={p.y}
-                    r="4"
-                    fill={p.arctic ? '#5FD4E8' : '#FF6B1A'}
-                  />
-                  <text
-                    x={p.x + 12}
-                    y={p.y - 10}
-                    fill="#E8EDF1"
-                    fontSize="13"
-                    fontFamily="var(--font-mono), monospace"
-                  >
-                    {p.name}
-                  </text>
-                </g>
-              ))}
+              {/*
+                Акцент на сайте один, поэтому арктические объекты
+                отделяются от дальневосточных яркостью, а не цветом:
+                за Полярным кругом — светлый лёд, южнее — приглушённая сталь.
+              */}
+              {points.map((p) => {
+                const tone = p.arctic ? PALETTE.signal : PALETTE.gridMajor;
+                return (
+                  <g key={p.name} className="geo-dot">
+                    <circle cx={p.x} cy={p.y} r="14" fill={tone} opacity="0.12" />
+                    <circle cx={p.x} cy={p.y} r="4" fill={tone} />
+                    <text
+                      x={p.x + 12}
+                      y={p.y - 10}
+                      fill="#E8EDF1"
+                      fontSize="13"
+                      fontFamily="var(--font-mono), monospace"
+                    >
+                      {p.name}
+                    </text>
+                  </g>
+                );
+              })}
             </svg>
           </div>
         </Reveal>

@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { PHASE, heroState, span } from './heroState';
+import { PALETTE } from '@/lib/palette';
 
 /**
  * Снег с боковым ветром.
@@ -107,7 +108,7 @@ export function Snow({ count, pixelRatio }: { count: number; pixelRatio: number 
           uIntensity: { value: 0 },
           uHeight: { value: HEIGHT },
           uPixelRatio: { value: pixelRatio },
-          uColor: { value: new THREE.Color('#cfe6ef') },
+          uColor: { value: new THREE.Color(PALETTE.snow) },
         },
       }),
     [pixelRatio]

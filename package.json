@@ -12,7 +12,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "preview": "next build && node scripts/build-single-file.mjs",
+    "verify": "node scripts/verify-preview.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

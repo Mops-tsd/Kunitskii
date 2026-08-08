@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { buildCity } from './cityLayout';
 import { PHASE, heroState, span } from './heroState';
+import { PALETTE } from '@/lib/palette';
 
 /**
  * Свайное поле.
@@ -85,7 +86,7 @@ export function Piles({ count }: { count: number }) {
         blending: THREE.AdditiveBlending,
         uniforms: {
           uProgress: { value: 0 },
-          uColor: { value: new THREE.Color('#ff6b1a') },
+          uColor: { value: new THREE.Color(PALETTE.pile) },
         },
       }),
     []
