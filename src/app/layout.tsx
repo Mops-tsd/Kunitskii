@@ -1,14 +1,30 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Oswald, JetBrains_Mono, Noto_Sans_Arabic } from 'next/font/google';
+import {
+  Inter,
+  PT_Sans_Narrow,
+  JetBrains_Mono,
+  Noto_Sans_Arabic,
+} from 'next/font/google';
 import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
 import ru from '@/content/ru';
 
-// Oswald — узкий гротеск, держит крупный заголовок и не разваливается
-// на кириллице. Inter — рабочий текст. Моноширинный — для служебных меток.
-const display = Oswald({
+/*
+ * Шрифт крупных заголовков.
+ *
+ * Был Oswald — узкий и выразительный, но кириллица у него сделана
+ * по остаточному принципу: кратка над «Й» стоит очень высоко и с
+ * отрывом от буквы. На кегле в сто с лишним пунктов она повисала между
+ * строк и читалась как случайная галочка рядом с фамилией.
+ *
+ * PT Sans Narrow нарисован под кириллицу с самого начала: диакритика
+ * прижата к букве, «Й» и «Ё» выглядят так, как их привыкли видеть.
+ * Он чуть спокойнее Oswald по характеру — для сайта, который будут
+ * читать, это скорее плюс.
+ */
+const display = PT_Sans_Narrow({
   subsets: ['latin', 'cyrillic'],
-  weight: ['500', '700'],
+  weight: ['400', '700'],
   variable: '--font-display',
   display: 'swap',
 });

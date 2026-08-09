@@ -26,7 +26,8 @@ export function Hero({ started }: { started: boolean }) {
   const textRef = useRef<HTMLDivElement>(null);
   const [introDone, setIntroDone] = useState(false);
   const introTween = useRef<gsap.core.Tween | null>(null);
-  const { t } = useI18n();
+  const firstReveal = useRef(true);
+  const { t, lang } = useI18n();
   const { reducedMotion, ready } = useDevice();
 
   // Прячем строки заголовка до первой отрисовки.
@@ -54,7 +55,7 @@ export function Hero({ started }: { started: boolean }) {
 
     introTween.current = gsap.to(heroState, {
       progress: INTRO_END,
-      duration: 4.6,
+      duration: 3.2,
       ease: 'power1.inOut',
       onComplete: () => setIntroDone(true),
     });
@@ -104,7 +105,15 @@ export function Hero({ started }: { started: boolean }) {
   useEffect(() => {
     if (!started || !ready) return;
 
-    const delay = reducedMotion ? 0 : 3.1;
+    /*
+     * Заголовок появляется ближе к началу вступления, а не к его концу.
+     * Сайт будут читать, а не разглядывать: имя и должность должны
+     * оказаться на экране раньше, чем досмотрят сцену.
+     *
+     * При смене языка ждать нечего — показываем сразу.
+     */
+    const delay = reducedMotion || !firstReveal.current ? 0 : 1.9;
+    firstReveal.current = false;
     const timeline = gsap.timeline({ delay });
 
     timeline
@@ -126,7 +135,13 @@ export function Hero({ started }: { started: boolean }) {
     return () => {
       timeline.kill();
     };
-  }, [started, ready, reducedMotion]);
+    /*
+     * lang в зависимостях не для красоты. Слова в строке под именем
+     * отрисованы по ключу-слову: при смене языка React создаёт новые
+     * узлы, а на них уже нет прозрачности, выставленной анимацией, —
+     * и строка просто исчезала. Проигрываем появление заново.
+     */
+  }, [started, ready, reducedMotion, lang]);
 
   const skipIntro = () => {
     introTween.current?.progress(1);
@@ -162,10 +177,10 @@ export function Hero({ started }: { started: boolean }) {
             </p>
 
             <h1 className="hero-name h-display text-chalk">
-              <span className="mask-line text-[15vw] leading-[0.86] md:text-[9.5vw]">
+              <span className="mask-line text-[15vw] leading-[0.9] md:text-[9.5vw]">
                 <span className="block">{t.hero.name}</span>
               </span>
-              <span className="mask-line text-[15vw] leading-[0.86] md:text-[9.5vw]">
+              <span className="mask-line text-[15vw] leading-[0.9] md:text-[9.5vw]">
                 <span className="block text-signalMuted">{t.hero.surname}</span>
               </span>
             </h1>
