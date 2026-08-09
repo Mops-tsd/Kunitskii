@@ -153,13 +153,13 @@ export function Hero({ started }: { started: boolean }) {
       className="relative"
       style={{ height: 'var(--hero-scroll)' }}
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="hero-stage sticky top-0 h-screen w-full overflow-hidden">
         {/* Слой 1 — 3D-сцена */}
         <div className="absolute inset-0">{started && <HeroCanvas />}</div>
 
         {/* Слой 2 — виньетка, чтобы текст читался поверх города */}
         <div
-          className="pointer-events-none absolute inset-0"
+          className="no-print pointer-events-none absolute inset-0"
           style={{
             background:
               'radial-gradient(120% 90% at 50% 45%, transparent 35%, rgba(5,6,7,0.55) 78%, rgba(5,6,7,0.92) 100%)',
@@ -199,7 +199,7 @@ export function Hero({ started }: { started: boolean }) {
         </div>
 
         {/* Слой 4 — подсказка о скролле */}
-        <div className="hero-hint pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0">
+        <div className="hero-hint no-print pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 opacity-0">
           <div className="flex flex-col items-center gap-2">
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-concrete">
               {t.hero.scrollHint}

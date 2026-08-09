@@ -16,7 +16,7 @@ export function Projects() {
     >
       <div className="shell">
         <SectionHead
-          index="06"
+          index="07"
           label={t.projects.section}
           title={t.projects.heading}
           lead={t.projects.lead}

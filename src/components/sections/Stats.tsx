@@ -16,7 +16,7 @@ export function Stats() {
   return (
     <section id="scale" className="relative border-t border-steel py-24 md:py-36">
       <div className="shell">
-        <SectionHead index="02" label={t.stats.section} title={t.stats.heading} />
+        <SectionHead index="03" label={t.stats.section} title={t.stats.heading} />
 
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-4 md:gap-x-10">
           {t.stats.items.map((item, i) => (

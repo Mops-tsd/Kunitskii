@@ -9,6 +9,7 @@ const en: Content = {
 
   nav: {
     about: 'Profile',
+    career: 'Career',
     scale: 'Scale',
     recognition: 'Recognition',
     geography: 'Geography',
@@ -45,6 +46,41 @@ const en: Content = {
     quote: 'We build where no one else builds.',
     portraitLabel: 'Portrait',
     portraitNote: 'A photograph will go here',
+  },
+
+  career: {
+    section: 'Career',
+    heading: 'How the experience was built',
+    lead:
+      'A sequence of roles — from individual companies within the group to running the group itself.',
+    steps: [
+      {
+        period: 'Present',
+        role: 'Managing Director of the group',
+        org: 'TransStroy Development Group',
+        body:
+          'Leads the investment and construction holding: residential districts, social facilities and engineering infrastructure across the Russian Arctic zone and the Far Eastern Federal District.',
+        source: 'Company materials',
+      },
+      {
+        period: 'Since 2025',
+        role: 'Chief Executive',
+        org: 'TSD Razvitie LLC, Chita',
+        body:
+          'The group’s Transbaikal arm: residential projects in Chita and Zabaykalsk, including a district on the border with China.',
+        source: 'State register of legal entities',
+      },
+      {
+        period: 'Since 2022',
+        role: 'Chief Executive',
+        org: 'TransStroy Development LLC, Vladivostok',
+        body:
+          'The Far Eastern arm: a licensed housing developer working under shared-construction contracts and within priority development area regimes.',
+        source: 'State register of legal entities',
+      },
+    ],
+    note:
+      'Based on open sources: the state register of legal entities and materials published by the group. Education and roles held before TransStroy Development will be added once confirmed.',
   },
 
   stats: {

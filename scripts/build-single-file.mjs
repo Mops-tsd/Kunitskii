@@ -264,6 +264,57 @@ console.log(`документ: ${(Buffer.byteLength(doc) / 1024 / 1024).toFixed(
 const headExtras = doc.match(/<head>([\s\S]*?)<\/head>/)?.[1] ?? '';
 const bodyInner = doc.match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1] ?? '';
 
+/*
+ * Шрифты живут на теге <html>, а его площадка публикации не берёт.
+ *
+ * next/font не подставляет имя шрифта в правила напрямую: он объявляет
+ * переменные (--font-display и остальные) в классе с рандомным именем и
+ * вешает этот класс на <html>. Вся вёрстка обращается уже к переменным.
+ *
+ * В файле для публикации от документа остаётся только внутренность
+ * body — тег <html> с классами теряется, переменные становятся пустыми,
+ * и каждый заголовок молча уезжает в шрифт по умолчанию. Внешне это
+ * выглядит как «сайт нарисован Times New Roman»: ошибок в консоли нет,
+ * проверки проходят, а типографика — чужая.
+ *
+ * Поэтому объявления из этих классов переносятся в :root, где они
+ * действуют независимо от того, во что обёрнут документ.
+ */
+const htmlClasses = (doc.match(/<html[^>]*\sclass="([^"]*)"/)?.[1] ?? '')
+  .split(/\s+/)
+  .filter(Boolean);
+
+const rootDecls = htmlClasses
+  .map((name) => {
+    // Класс в CSS может стоять как один или в группе селекторов.
+    const rule = css.match(
+      new RegExp(`(?:^|[,}])[^{}]*\\.${name}\\b[^{}]*\\{([^{}]*)\\}`)
+    );
+    return rule?.[1]?.trim().replace(/;$/, '') ?? '';
+  })
+  .filter(Boolean)
+  // Точка с запятой обязательна: в сжатом CSS последнее объявление в
+  // правиле идёт без неё, и склеенные подряд они читаются браузером
+  // как одно испорченное — переменные молча пропадают.
+  .join(';');
+
+if (htmlClasses.length && !rootDecls) {
+  throw new Error(
+    'классы <html> есть, но их объявления не нашлись в CSS — шрифты потеряются'
+  );
+}
+
+/*
+ * Заодно повторяем то, что на боевой сборке даёт класс на <body>:
+ * фон, цвет текста и сглаживание. Оборачивать содержимое в <div>
+ * с теми же классами нельзя — React восстанавливает разметку от
+ * корня документа и лишний узел ему мешает.
+ */
+const rootStyle = rootDecls
+  ? `<style>:root{${rootDecls}}
+body{background:var(--void);color:var(--chalk);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}</style>`
+  : '';
+
 // Из head забираем только то, что влияет на отрисовку: стили и прологи.
 const keptHead = [
   ...(headExtras.match(/<style>[\s\S]*?<\/style>/g) ?? []),
@@ -274,6 +325,7 @@ const title = doc.match(/<title>([^<]*)<\/title>/)?.[1] ?? 'Евгений Ку�
 
 const flat = `<title>${title}</title>
 ${keptHead}
+${rootStyle}
 ${bodyInner}`;
 
 await writeFile(path.join(DIR, 'index.html'), flat, 'utf8');

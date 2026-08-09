@@ -107,6 +107,19 @@ for (const vp of VIEWPORTS) {
       images: [...document.images].filter(
         (i) => !(i.getAttribute('src') ?? '').startsWith('data:')
       ).length,
+      /*
+       * Шрифт заголовков.
+       *
+       * Имя шрифта нигде не написано словами: вёрстка обращается к
+       * переменной, а переменную объявляет класс на теге <html>. Стоит
+       * этому классу потеряться при сборке — и весь сайт спокойно
+       * рисуется шрифтом по умолчанию: ни ошибок, ни пустых мест,
+       * просто чужая типографика. Один раз так и уехало в публикацию.
+       */
+      headingFont: (() => {
+        const h = document.querySelector('.h-display');
+        return h ? getComputedStyle(h).fontFamily : '';
+      })(),
     };
   });
 
@@ -116,6 +129,10 @@ for (const vp of VIEWPORTS) {
   check(state.images === 0, 'все фото вшиты как data-URI');
   check(external.length === 0, `внешних запросов нет (${external.slice(0, 3).join(', ')})`);
   check(shaderErrors.length === 0, `шейдеры собрались (${shaderErrors[0] ?? ''})`);
+  check(
+    /PT[_ ]?Sans[_ ]?Narrow/i.test(state.headingFont),
+    `заголовки набраны своим шрифтом (${state.headingFont || 'не определён'})`
+  );
 
   if (SHOTS) {
     await p.screenshot({ path: path.join(SHOTS, `${vp.name}-hero.png`) });

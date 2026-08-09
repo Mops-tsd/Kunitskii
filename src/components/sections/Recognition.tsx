@@ -22,7 +22,7 @@ export function Recognition() {
     >
       <div className="shell">
         <SectionHead
-          index="03"
+          index="04"
           label={t.recognition.section}
           title={t.recognition.heading}
           lead={t.recognition.lead}

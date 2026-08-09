@@ -6,6 +6,7 @@ import { LANGS, type Lang } from '@/content/types';
 
 const SECTIONS = [
   { id: 'about', key: 'about' },
+  { id: 'career', key: 'career' },
   { id: 'scale', key: 'scale' },
   { id: 'recognition', key: 'recognition' },
   { id: 'geography', key: 'geography' },
@@ -46,7 +47,7 @@ export function Nav({ visible }: { visible: boolean }) {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-opacity duration-700 ${
+        className={`no-print fixed inset-x-0 top-0 z-50 transition-opacity duration-700 ${
           visible ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
@@ -66,6 +67,7 @@ export function Nav({ visible }: { visible: boolean }) {
                 key={id}
                 type="button"
                 onClick={() => go(id)}
+                aria-current={active === id ? 'true' : undefined}
                 className={`group flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] transition-colors ${
                   active === id ? 'text-signal' : 'text-concrete hover:text-chalk'
                 }`}
@@ -85,7 +87,9 @@ export function Nav({ visible }: { visible: boolean }) {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              aria-label="Menu"
+              aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               className="flex h-8 w-8 flex-col items-end justify-center gap-1.5 lg:hidden"
             >
               <span
@@ -105,7 +109,12 @@ export function Nav({ visible }: { visible: boolean }) {
 
       {/* Полноэкранное меню для телефона */}
       <div
-        className={`fixed inset-0 z-40 bg-void/97 backdrop-blur-sm transition-all duration-500 lg:hidden ${
+        id="mobile-menu"
+        // Пока меню закрыто, его пункты не должны попадать ни под Tab,
+        // ни в программу чтения с экрана: они видимы только на просвет.
+        aria-hidden={!open}
+        inert={!open}
+        className={`no-print fixed inset-0 z-40 bg-void/97 backdrop-blur-sm transition-all duration-500 lg:hidden ${
           open ? 'opacity-100' : 'pointer-events-none opacity-0'
         }`}
       >
@@ -139,12 +148,14 @@ function LangSwitch({
   setLang: (l: Lang) => void;
 }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2" role="group" aria-label="Язык сайта">
       {LANGS.map(({ code, label }) => (
         <button
           key={code}
           type="button"
           onClick={() => setLang(code)}
+          lang={code}
+          aria-pressed={lang === code}
           className={`font-mono text-[11px] transition-colors ${
             lang === code ? 'text-signal' : 'text-concrete hover:text-chalk'
           }`}

@@ -11,7 +11,7 @@ export function Principles() {
     <section className="relative border-t border-steel py-24 md:py-36">
       <div className="shell">
         <SectionHead
-          index="04"
+          index="05"
           label={t.principles.section}
           title={t.principles.heading}
         />

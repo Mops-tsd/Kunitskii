@@ -7,6 +7,7 @@ import {
 } from 'next/font/google';
 import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
+import { Analytics } from '@/components/Analytics';
 import ru from '@/content/ru';
 import { LINKS } from '@/content/links';
 import { SITE_ORIGIN, absolute } from '@/lib/site';
@@ -150,7 +151,22 @@ export default function RootLayout({
           // а не что-то пришедшее со стороны.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
+        {/*
+          Первая ссылка на странице — «сразу к тексту».
+          Не видна, пока по ней не пришли клавишей Tab. Нужна тем, кто
+          читает страницу с клавиатуры или через программу чтения с
+          экрана: иначе путь к содержимому лежит через всё меню, а перед
+          ним ещё и вступительная анимация.
+        */}
+        <a
+          href="#about"
+          className="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[100] focus:border focus:border-signal focus:bg-void focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-signal"
+        >
+          Перейти к содержанию
+        </a>
+
         <I18nProvider>{children}</I18nProvider>
+        <Analytics />
       </body>
     </html>
   );

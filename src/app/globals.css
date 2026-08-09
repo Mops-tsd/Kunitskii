@@ -38,6 +38,19 @@
     overflow: hidden;
   }
 
+  /*
+   * Видимый фокус — только для клавиатуры.
+   *
+   * :focus-visible, а не :focus: по клику рамка не появляется, при
+   * переходе клавишей Tab — появляется. Без неё человек, который ходит
+   * по сайту с клавиатуры, не понимает, где находится.
+   */
+  :where(a, button, [tabindex]):focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 3px;
+    border-radius: 1px;
+  }
+
   ::selection {
     background: var(--signal);
     color: var(--void);
@@ -153,6 +166,74 @@ html[dir='rtl'] .eyebrow {
 html[lang='zh'] .h-display {
   letter-spacing: 0;
   line-height: 1.05;
+}
+
+/*
+ * Печать и сохранение в PDF.
+ *
+ * Не декоративная мелочь. Сайт делается для человека, который читает
+ * текст, а такой текст пересылают и распечатывают — на встречу, в
+ * папку к документам. По умолчанию печать тёмной страницы даёт лист,
+ * залитый чёрным, поверх которого не видно ни строчки.
+ *
+ * Проще всего переопределить не сотни правил, а сами цвета: вся
+ * вёрстка обращается к переменным, поэтому достаточно поменять
+ * палитру на светлую — и страница печатается как обычный документ.
+ */
+@media print {
+  :root {
+    --void: #ffffff;
+    --ink: #ffffff;
+    --graphite: #f2f4f5;
+    --steel: #c8ced3;
+    --concrete: #3d454b;
+    --chalk: #06090b;
+    /* Голубой акцент на бумаге почти не виден — берём тёмный вариант. */
+    --signal: #0b6577;
+    --ice: #0b6577;
+
+    /* Первый экран на бумаге не нужен во всю высоту прокрутки. */
+    --hero-scroll: auto;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Сцена и виньетка — только на экране. */
+  .hero-stage canvas {
+    display: none !important;
+  }
+
+  /* Заголовок первого экрана печатается как обычный блок текста. */
+  .hero-stage,
+  .hero-stage > * {
+    position: static !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .hero-stage h1 {
+    font-size: 32pt !important;
+  }
+  .mask-line,
+  .mask-line > span {
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* На бумаге ссылка без адреса бесполезна — дописываем его рядом. */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 9pt;
+    word-break: break-all;
+  }
 }
 
 /* Уважаем системную настройку «меньше движения». */

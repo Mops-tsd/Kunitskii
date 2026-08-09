@@ -5,6 +5,7 @@ import { Preloader } from '@/components/Preloader';
 import { Nav } from '@/components/Nav';
 import { Hero } from '@/components/hero/Hero';
 import { About } from '@/components/sections/About';
+import { Career } from '@/components/sections/Career';
 import { Stats } from '@/components/sections/Stats';
 import { Recognition } from '@/components/sections/Recognition';
 import { Principles } from '@/components/sections/Principles';
@@ -53,6 +54,7 @@ export default function Page() {
         */}
         <div className="relative z-10 bg-void">
           <About />
+          <Career />
           <Stats />
           <Recognition />
           <Principles />

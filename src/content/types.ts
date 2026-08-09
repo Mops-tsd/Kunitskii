@@ -59,6 +59,33 @@ export interface TimelineEntry {
   body: string;
 }
 
+/**
+ * Ступень карьеры.
+ *
+ * Отдельно от TimelineEntry, хотя обе выглядят как «год — текст».
+ * У компании хронология — про события, у человека — про должности:
+ * важны период, роль и организация, и они нужны отдельными полями,
+ * иначе их не перевести и не отдать поисковику разметкой.
+ */
+export interface CareerStep {
+  /** Период: «2022 — н. в.», «2015–2019». */
+  period: string;
+  /** Должность. */
+  role: string;
+  /** Организация. */
+  org: string;
+  /** Чем занимался — одна-две фразы, без общих слов. */
+  body: string;
+  /**
+   * Откуда сведения: «ЕГРЮЛ», «Сайт группы».
+   *
+   * Показывается мелким шрифтом. Для человека, который вчитывается,
+   * подпись источника — не украшение: она отличает проверяемый факт
+   * от красивой формулировки.
+   */
+  source?: string;
+}
+
 export interface Appearance {
   date: string;
   event: string;
@@ -73,6 +100,7 @@ export interface Content {
   };
   nav: {
     about: string;
+    career: string;
     scale: string;
     recognition: string;
     geography: string;
@@ -103,6 +131,14 @@ export interface Content {
     /** Подписи в рамке, которая стоит вместо будущей фотографии. */
     portraitLabel: string;
     portraitNote: string;
+  };
+  career: {
+    section: string;
+    heading: string;
+    lead: string;
+    steps: CareerStep[];
+    /** Подпись под лестницей: откуда взяты сведения. */
+    note: string;
   };
   stats: {
     section: string;

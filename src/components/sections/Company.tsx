@@ -11,7 +11,7 @@ export function Company() {
     <section className="relative border-t border-steel py-24 md:py-36">
       <div className="shell">
         <SectionHead
-          index="07"
+          index="08"
           label={t.company.section}
           title={t.company.heading}
           lead={t.company.lead}
@@ -30,8 +30,13 @@ export function Company() {
           <ol className="relative md:col-span-7">
             <span className="absolute inset-y-0 start-0 w-px bg-steel" />
             {t.company.timeline.map((entry, i) => (
-              <Reveal as="li" key={entry.year} delay={i * 0.07}>
-                <div className="relative ps-8 pb-10 last:pb-0">
+              <Reveal
+                as="li"
+                key={entry.year}
+                delay={i * 0.07}
+                className="block pb-10 last:pb-0"
+              >
+                <div className="relative ps-8">
                   <span className="absolute start-0 top-2 h-2 w-2 -translate-x-1/2 rounded-full bg-signal rtl:translate-x-1/2" />
                   <div className="font-mono text-xs tracking-[0.16em] text-signal">
                     {entry.year}
