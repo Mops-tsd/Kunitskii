@@ -26,7 +26,6 @@ export function HeroCanvas() {
   const { isMobile, isLowPower, reducedMotion, ready } = useDevice();
 
   const light = !ready || isMobile || isLowPower;
-  const buildingCount = light ? 90 : 190;
   const snowCount = light ? 900 : 3200;
   /*
    * Сцена упирается не в количество объектов, а в закраску пикселей:
@@ -58,10 +57,18 @@ export function HeroCanvas() {
     return () => observer.disconnect();
   }, []);
 
-  // Если устройство не тянет, первым отключается то, что дороже всего
-  // относительно вклада в кадр.
+  /*
+   * Если устройство не тянет, качество снижается ступенями.
+   *
+   * Сначала уходят краны и падает плотность пикселей, на второй ступени
+   * редеет сама застройка. Город строится от центра наружу, поэтому
+   * меньшее число домов обрезает окраину — её и так съедает туман.
+   */
   const [quality, setQuality] = useState(0);
   const handleDowngrade = useCallback((step: number) => setQuality(step), []);
+
+  const fullCount = light ? 90 : 190;
+  const buildingCount = quality >= 2 ? Math.round(fullCount * 0.45) : fullCount;
 
   // Параллакс от указателя. На тач-устройствах не нужен — там нет курсора.
   useEffect(() => {

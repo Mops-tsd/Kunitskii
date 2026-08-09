@@ -162,6 +162,7 @@ export interface Content {
   };
   footer: {
     rights: string;
+    privacy: string;
     disclaimer: string;
   };
   ui: {

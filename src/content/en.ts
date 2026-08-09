@@ -297,6 +297,7 @@ const en: Content = {
 
   footer: {
     rights: 'All rights reserved',
+    privacy: 'Privacy policy',
     disclaimer:
       'Project information is provided for reference only and does not constitute a public offer.',
   },

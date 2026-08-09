@@ -25,6 +25,8 @@ const nextConfig = {
     // next/image, поэтому Next их сам не префиксует — подставляем вручную
     // там, где они попадают в разметку (см. src/lib/asset.ts).
     NEXT_PUBLIC_BASE_PATH: basePath,
+    // Полный адрес нужен карточке превью, robots.txt и карте сайта.
+    NEXT_PUBLIC_SITE_URL: process.env.SITE_URL ?? '',
   },
 };
 

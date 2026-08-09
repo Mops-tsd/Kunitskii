@@ -8,6 +8,8 @@ import {
 import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
 import ru from '@/content/ru';
+import { LINKS } from '@/content/links';
+import { SITE_ORIGIN, absolute } from '@/lib/site';
 
 /*
  * Шрифт крупных заголовков.
@@ -49,13 +51,76 @@ const arabic = Noto_Sans_Arabic({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_ORIGIN),
   title: ru.meta.title,
   description: ru.meta.description,
+  /*
+   * Карточка превью для мессенджеров.
+   *
+   * Главное действие на сайте — написать в мессенджер, значит и ссылку
+   * будут пересылать там же. Без картинки и описания в переписку падает
+   * голая строка адреса: человек не понимает, что ему прислали, ещё до
+   * того, как откроет. Картинка снимается с первого экрана —
+   * scripts/make-og.mjs.
+   */
   openGraph: {
+    type: 'profile',
+    locale: 'ru_RU',
+    siteName: 'Евгений Куницкий',
     title: ru.meta.title,
     description: ru.meta.description,
-    type: 'profile',
+    url: absolute('/'),
+    images: [
+      {
+        url: absolute('/og.jpg'),
+        width: 1200,
+        height: 630,
+        alt: 'Евгений Куницкий — управляющий ГК «ТрансСтрой Девелопмент»',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: ru.meta.title,
+    description: ru.meta.description,
+    images: [absolute('/og.jpg')],
+  },
+};
+
+/**
+ * Разметка для поисковиков.
+ *
+ * Описывает страницу не словами, а данными: кто это, кем работает, где
+ * компания. От этого зависит, как ссылка выглядит в выдаче и попадёт ли
+ * человек в справочные карточки — при поиске по имени это первое, что
+ * увидят.
+ */
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Куницкий Евгений Александрович',
+  alternateName: 'Евгений Куницкий',
+  jobTitle: 'Управляющий группой компаний «ТрансСтрой Девелопмент»',
+  url: absolute('/'),
+  image: absolute('/og.jpg'),
+  description: ru.meta.description,
+  worksFor: {
+    '@type': 'Organization',
+    name: 'ГК «ТрансСтрой Девелопмент»',
+    alternateName: 'TSD Group',
+    url: LINKS.companySite,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Владивосток',
+      addressCountry: 'RU',
+      streetAddress: 'ул. Днепровская, 107, офис 4',
+    },
+  },
+  knowsAbout: [
+    'Комплексное развитие территорий',
+    'Жилищное строительство в Арктической зоне',
+    'Девелопмент на Дальнем Востоке',
+  ],
 };
 
 export const viewport: Viewport = {
@@ -79,6 +144,12 @@ export default function RootLayout({
       className={`${display.variable} ${sans.variable} ${mono.variable} ${arabic.variable}`}
     >
       <body className="bg-void text-chalk antialiased">
+        <script
+          type="application/ld+json"
+          // Данные свои, не пользовательские: подставляется объект выше,
+          // а не что-то пришедшее со стороны.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <I18nProvider>{children}</I18nProvider>
       </body>
     </html>

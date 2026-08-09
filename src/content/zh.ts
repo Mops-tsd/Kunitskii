@@ -277,6 +277,7 @@ const zh: Content = {
 
   footer: {
     rights: '版权所有',
+    privacy: '隐私政策',
     disclaimer: '项目信息仅供参考，不构成公开要约。',
   },
 

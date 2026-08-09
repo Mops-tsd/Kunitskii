@@ -1,6 +1,7 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { Reveal } from '@/components/ui/Reveal';
 import { LINKS, LAUNCH_YEAR } from '@/content/links';
 
@@ -101,6 +102,15 @@ export function Footer() {
           © {Math.max(year, LAUNCH_YEAR)} {t.contact.company}. {t.footer.rights}.
         </span>
         <span className="max-w-md leading-relaxed">{t.footer.disclaimer}</span>
+
+        {/* Ссылка нужна на всех языках: документ один и на русском —
+            это юридический текст по месту регистрации компании. */}
+        <a
+          href={asset('/privacy/')}
+          className="font-mono uppercase tracking-[0.14em] transition-colors hover:text-signal"
+        >
+          {t.footer.privacy}
+        </a>
       </div>
     </footer>
   );
