@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Знак сайта: силуэт застройки над линией земли и свая под ней —
+       та же логика, что и во вступительной анимации. -->
+  <rect width="32" height="32" fill="#050607"/>
+  <g fill="#5FD4E8">
+    <rect x="5" y="13" width="5" height="9"/>
+    <rect x="12" y="7" width="6" height="15"/>
+    <rect x="20" y="11" width="5" height="11"/>
+  </g>
+  <line x1="2" y1="22" x2="30" y2="22" stroke="#2F8FA6" stroke-width="1.5"/>
+  <line x1="15" y1="22" x2="15" y2="28" stroke="#6FE0F2" stroke-width="1.5"/>
+</svg>

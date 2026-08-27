@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://mops-tsd.github.io/Kunitskii/sitemap.xml
