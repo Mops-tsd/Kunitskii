@@ -1,6 +1,7 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHead } from '@/components/ui/SectionHead';
 
@@ -31,14 +32,29 @@ export function Recognition() {
         <ul className="divide-y divide-steel border-y border-steel">
           {t.recognition.items.map((item, i) => (
             <Reveal as="li" key={item.title} delay={i * 0.06}>
-              <div className="group grid gap-3 py-8 md:grid-cols-12 md:items-baseline md:gap-8">
+              <div className="group grid gap-3 py-8 md:grid-cols-12 md:items-start md:gap-8">
                 <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-signal md:col-span-3">
                   {item.source}
                 </span>
                 <h3 className="h-display text-2xl leading-tight text-chalk transition-colors group-hover:text-signal md:col-span-4">
                   {item.title}
                 </h3>
-                <p className="text-concrete md:col-span-5">{item.body}</p>
+                <div className="md:col-span-5">
+                  <p className="text-concrete">{item.body}</p>
+
+                  {item.image && (
+                    <figure className="mt-5 max-w-xs overflow-hidden border border-steel bg-graphite">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={asset(item.image)}
+                        alt={`${item.source} — ${item.title}`}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full"
+                      />
+                    </figure>
+                  )}
+                </div>
               </div>
             </Reveal>
           ))}

@@ -15,5 +15,13 @@ export const LINKS = {
   companySite: 'https://www.tsr-gr.ru/',
 };
 
+/**
+ * Портрет.
+ *
+ * Лежит здесь, а не в текстах: файл один на все языки, переводится
+ * только подпись к нему.
+ */
+export const PORTRAIT = '/images/kunitskiy-portrait.webp';
+
 /** Год для подвала — считается на клиенте, чтобы не устаревал. */
 export const LAUNCH_YEAR = 2026;

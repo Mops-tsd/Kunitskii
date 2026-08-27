@@ -44,8 +44,9 @@ const en: Content = {
       'His professional track record is tied to construction in regions where a short building season, permafrost and supply lines of thousands of kilometres make conventional solutions inapplicable.',
     ],
     quote: 'We build where no one else builds.',
-    portraitLabel: 'Portrait',
-    portraitNote: 'A photograph will go here',
+    portraitLabel: 'Eastern Economic Forum, 2025',
+    portraitNote:
+      'Evgeny Kunitskiy at the Eastern Economic Forum in Vladivostok',
   },
 
   career: {
@@ -105,6 +106,13 @@ const en: Content = {
     lead:
       'The group delivers its projects alongside state programmes and development institutions — an outside check that the talk of scale is backed by commitments.',
     items: [
+      {
+        source: 'FEDA Corporation',
+        title: 'Letter of Appreciation',
+        body:
+          'A letter of appreciation to Evgeny Aleksandrovich Kunitskiy from the Corporation for the Development of the Far East and the Arctic, for a significant contribution to construction. Signed by the corporation’s CEO.',
+        image: '/images/krdv-award.webp',
+      },
       {
         source: 'Ministry of Construction',
         // TODO: confirm the status — a nomination or an award already granted.
@@ -316,7 +324,51 @@ const en: Content = {
         place: 'Vladivostok',
         topic: 'Delivering investment projects in the Far East',
       },
+      {
+        date: '3–6 Sep 2025',
+        event: 'Eastern Economic Forum',
+        place: 'Vladivostok',
+        topic:
+          'Forum business programme; interviews at the RBC, TASS and Rossiyskaya Gazeta studios',
+      },
+      {
+        date: '2024',
+        event: 'St Petersburg International Economic Forum',
+        place: 'St Petersburg',
+        topic:
+          'Agreement signed at the stand of the Ministry for the Development of the Far East and the Arctic and FEDA',
+      },
     ],
+
+    agreements: {
+      heading: 'Agreements and partnerships',
+      items: [
+        {
+          image: '/images/sber-agreement.webp',
+          title: 'Sberbank',
+          body:
+            'Signing of an agreement between Sberbank and TransStroy Development Group.',
+        },
+        {
+          image: '/images/spief-2024.webp',
+          title: 'SPIEF, 2024',
+          body:
+            'Signed at the stand of the Ministry for the Development of the Far East and the Arctic and FEDA.',
+        },
+        {
+          image: '/images/murmansk-agreement.webp',
+          title: 'Murmansk Region',
+          body:
+            'Agreement with the government of the Murmansk Region — the group’s Arctic arm.',
+        },
+        {
+          image: '/images/vef-2025-khabarovsk.webp',
+          title: 'Khabarovsk Territory',
+          body:
+            'A working meeting at the Eastern Economic Forum, 2025.',
+        },
+      ],
+    },
   },
 
   contact: {

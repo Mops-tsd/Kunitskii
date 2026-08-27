@@ -1,8 +1,10 @@
 'use client';
 
 import { useI18n } from '@/lib/i18n';
+import { asset } from '@/lib/asset';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionHead } from '@/components/ui/SectionHead';
+import { PORTRAIT } from '@/content/links';
 
 export function About() {
   const { t } = useI18n();
@@ -30,33 +32,31 @@ export function About() {
           </div>
 
           <div className="md:col-span-5">
-            {/*
-              Портрета пока нет — вместо «рыбы» из стока стоит рамка
-              с координатами Владивостока: честнее и в стилистике чертежа.
-            */}
             <Reveal delay={0.1}>
               <figure className="relative aspect-[4/5] overflow-hidden border border-steel bg-graphite">
-                <div
-                  className="absolute inset-0 opacity-30"
-                  style={{
-                    backgroundImage:
-                      'linear-gradient(rgba(95,212,232,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(95,212,232,0.16) 1px, transparent 1px)',
-                    backgroundSize: '28px 28px',
-                  }}
+                {/*
+                  Обычный <img>: сборка статическая, сервера оптимизации
+                  картинок под ней нет, файл уже ужат на этапе сборки.
+                */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={asset(PORTRAIT)}
+                  alt={t.about.portraitNote}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 flex flex-col justify-between p-6">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-concrete">
-                    43°07′N 131°53′E
+                {/*
+                  Затемнение только у нижней кромки — под подпись.
+                  По лицу фильтров нет: снимок деловой, и приводить его
+                  к «стилю сайта» значит прятать то, ради чего он здесь.
+                */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent" />
+                <figcaption className="absolute inset-x-0 bottom-0 p-5">
+                  <span className="block font-mono text-[10px] uppercase tracking-[0.24em] text-signal">
+                    {t.about.portraitLabel}
                   </span>
-                  <div>
-                    <span className="block font-mono text-[10px] uppercase tracking-[0.24em] text-signal">
-                      {t.about.portraitLabel}
-                    </span>
-                    <span className="mt-1 block text-sm text-concrete">
-                      {t.about.portraitNote}
-                    </span>
-                  </div>
-                </div>
+                </figcaption>
                 {/* Уголки рамки — как метки кадрирования на чертеже */}
                 {['left-3 top-3', 'right-3 top-3', 'left-3 bottom-3', 'right-3 bottom-3'].map(
                   (pos) => (

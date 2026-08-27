@@ -34,6 +34,22 @@ export interface RecognitionItem {
   source: string;
   title: string;
   body: string;
+  /**
+   * Фотография документа или вручения.
+   *
+   * Есть не у всех пунктов, и это правильно: участие в федеральной
+   * программе документом с печатью не подтверждается. Там, где снимок
+   * есть, он стоит дороже любой формулировки — читателю видно, что
+   * награда существует в природе.
+   */
+  image?: string;
+}
+
+/** Снимок с подписью: подписание соглашения, выступление, вручение. */
+export interface PhotoItem {
+  image: string;
+  title: string;
+  body: string;
 }
 
 export interface Principle {
@@ -128,7 +144,7 @@ export interface Content {
     body: string[];
     /** Цитата Куницкого — она же смысловая ось всего сайта. */
     quote: string;
-    /** Подписи в рамке, которая стоит вместо будущей фотографии. */
+    /** Подпись под портретом и описание для программ чтения с экрана. */
     portraitLabel: string;
     portraitNote: string;
   };
@@ -184,6 +200,17 @@ export interface Content {
     heading: string;
     lead: string;
     items: Appearance[];
+    /**
+     * Соглашения — отдельным блоком, а не строками в списке выступлений.
+     *
+     * У выступления есть дата и тема, у соглашения — стороны и предмет.
+     * Свести их в одну таблицу можно, но тогда половина клеток окажется
+     * пустой, а пустая клетка на странице выглядит как недоделка.
+     */
+    agreements: {
+      heading: string;
+      items: PhotoItem[];
+    };
   };
   contact: {
     section: string;

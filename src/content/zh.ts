@@ -44,8 +44,8 @@ const zh: Content = {
       '他的职业道路与在施工季节短暂、永久冻土广布、物流距离长达数千公里的地区从事建设密切相关，这些条件使常规方案无法适用。',
     ],
     quote: '我们建设在无人建设的地方。',
-    portraitLabel: '肖像',
-    portraitNote: '此处将放置照片',
+    portraitLabel: '东方经济论坛，2025年',
+    portraitNote: '叶夫根尼·库尼茨基在符拉迪沃斯托克举行的东方经济论坛上',
   },
 
   career: {
@@ -104,6 +104,13 @@ const zh: Content = {
     lead:
       '集团的项目与国家计划及开发机构共同推进——这是对其规模承诺的外部检验。',
     items: [
+      {
+        source: '远东与北极发展公司',
+        title: '感谢状',
+        body:
+          '远东与北极发展公司（КРДВ）授予叶夫根尼·亚历山德罗维奇·库尼茨基感谢状，表彰其对建筑事业发展的重要贡献，由公司总经理签署。',
+        image: '/images/krdv-award.webp',
+      },
       {
         source: '俄罗斯建设部',
         // TODO: 需确认状态——提名还是已授予的奖项。
@@ -295,7 +302,45 @@ const zh: Content = {
         place: '符拉迪沃斯托克',
         topic: '远东地区投资项目的实施',
       },
+      {
+        date: '2025.09.03–06',
+        event: '东方经济论坛',
+        place: '符拉迪沃斯托克',
+        topic: '论坛商务议程；接受俄新社РБК、塔斯社及《俄罗斯报》演播室采访',
+      },
+      {
+        date: '2024年',
+        event: '圣彼得堡国际经济论坛',
+        place: '圣彼得堡',
+        topic: '在俄罗斯远东与北极发展部及远东与北极发展公司展台签署协议',
+      },
     ],
+
+    agreements: {
+      heading: '协议与合作',
+      items: [
+        {
+          image: '/images/sber-agreement.webp',
+          title: '俄罗斯联邦储蓄银行',
+          body: '储蓄银行与“运输建设开发”集团签署合作协议。',
+        },
+        {
+          image: '/images/spief-2024.webp',
+          title: '圣彼得堡国际经济论坛，2024年',
+          body: '在俄罗斯远东与北极发展部及远东与北极发展公司展台签署。',
+        },
+        {
+          image: '/images/murmansk-agreement.webp',
+          title: '摩尔曼斯克州',
+          body: '与摩尔曼斯克州政府签署协议——集团的北极方向。',
+        },
+        {
+          image: '/images/vef-2025-khabarovsk.webp',
+          title: '哈巴罗夫斯克边疆区',
+          body: '2025年东方经济论坛期间的工作会晤。',
+        },
+      ],
+    },
   },
 
   contact: {
